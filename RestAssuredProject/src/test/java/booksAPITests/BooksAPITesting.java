@@ -2,11 +2,15 @@ package booksAPITests;
 
 import static io.restassured.RestAssured.given;
 
+import java.util.List;
+import java.util.Map;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 public class BooksAPITesting {
@@ -14,6 +18,7 @@ public class BooksAPITesting {
 	private static final String API_BOOKS_URL = "https://simple-books-api.glitch.me/books";
 	private static final long VALID_RESPONSE_CODE = 200;
 	private static final String CONTENT_TYPE_JSON = "application/json; charset=utf-8";
+	private static final long ACCEPTABLE_RESPONSE_TIME = 1000; // milliseconds
 
 	@BeforeMethod
 	public void setup() {
@@ -30,6 +35,28 @@ public class BooksAPITesting {
 		Assert.assertEquals(contentType, CONTENT_TYPE_JSON, "Response format is not JSON");
 	}
 
+	// Verify API Response Fields
+	@Test
+	void testResponseFields() {
+		JsonPath jsonPath = response.jsonPath();
+		List<Map<String, Object>> books = jsonPath.getList("$");
+
+		for (Map<String, Object> book : books) {
+			Assert.assertTrue(book.containsKey("id"), "id field is missing");
+			Assert.assertTrue(book.containsKey("name"), "name field is missing");
+			Assert.assertTrue(book.containsKey("type"), "type field is missing");
+			Assert.assertTrue(book.containsKey("available"), "available field is missing");
+		}
+	}
+
+	// Verify that the API response time is within acceptable limits.
+	@Test
+	void testResponseTime() {
+		long responseTime = response.getTime();
+		Assert.assertTrue(responseTime <= ACCEPTABLE_RESPONSE_TIME,
+				"Response time is not within limits of:" + ACCEPTABLE_RESPONSE_TIME);
+	}
+
 	// Test to get details of a specific book
 	@Test
 	public void testGetSpecificBook() {
@@ -37,7 +64,7 @@ public class BooksAPITesting {
 		String accessToken = AccessTokenHelper.getAccessToken();
 
 		// ID of the specific book you want to retrieve
-		String bookId = "/1"; // Change to the actual book ID
+		String bookId = "/1";
 		String requestUrl = API_BOOKS_URL + bookId;
 
 		// Sending GET request to get details of the specific book
@@ -48,5 +75,4 @@ public class BooksAPITesting {
 		int statusCode = specificBookResponse.getStatusCode();
 		Assert.assertEquals(statusCode, 200, "Status code is not 200");
 	}
-
 }
