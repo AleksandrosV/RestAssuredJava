@@ -49,28 +49,29 @@ public class BooksAPITesting {
 	@Test
 	public void testAPIStatusCode() {
 		int statusCode = response.getStatusCode();
-		Assert.assertEquals(statusCode, VALID_RESPONSE_CODE, "Status code is not 200");
+		Assert.assertEquals(statusCode, VALID_RESPONSE_CODE, "Status code is not: " + VALID_RESPONSE_CODE);
 	}
 
 	// Verify API status message
 	@Test
 	public void testAPIStatusMessage() {
 		String statusMessage = response.getStatusLine();
-		Assert.assertEquals(statusMessage, SUCCESS_MESSAGE, "Status message does not contain 'OK'");
+		Assert.assertEquals(statusMessage, SUCCESS_MESSAGE, "Status message is not: " + SUCCESS_MESSAGE);
 	}
 
 	// Verify API Response Format
 	@Test
 	void testResponseFormat() {
 		String contentType = response.getContentType();
-		Assert.assertEquals(contentType, CONTENT_TYPE, "Response format is not JSON");
+		Assert.assertEquals(contentType, CONTENT_TYPE, "Response format is not:" + CONTENT_TYPE);
 	}
 
 	// Verify that the API response time is within acceptable limits.
 	@Test
 	void testResponseTime() {
 		long responseTime = response.getTime();
-		Assert.assertTrue(responseTime <= ACCEPTABLE_RESPONSE_TIME, "Response time is not within acceptable limits");
+		Assert.assertTrue(responseTime <= ACCEPTABLE_RESPONSE_TIME,
+				"Response time is not within limits of:" + ACCEPTABLE_RESPONSE_TIME);
 	}
 
 	// Verify API Response Fields
@@ -78,5 +79,59 @@ public class BooksAPITesting {
 	void testResponseFields() {
 		JsonPath jsonPath = response.jsonPath();
 		Assert.assertNotNull(jsonPath.get("status"), "Status field is missing");
+	}
+
+	// Test to get the list of books and print the response body to the console
+	@Test
+	public void testGetBooksAndPrintResponse() {
+		// Optional query parameters
+		String type = "non-fiction"; // Change as needed
+		int limit = 20; // Change as needed
+
+		// Building the request URL with query parameters
+		String requestUrl = "https://simple-books-api.glitch.me/books";
+		if (type != null) {
+			requestUrl += "?type=" + type;
+		}
+		if (limit > 0 && limit <= 20) {
+			requestUrl += (type != null ? "&" : "?") + "limit=" + limit;
+		}
+
+		// Sending GET request to /books endpoint
+		Response response = given().contentType(ContentType.JSON).when().get(requestUrl);
+
+		// Printing the response body to the console
+		System.out.println("Response Body:");
+		System.out.println(response.getBody().asString());
+
+		// Validating response
+		int statusCode = response.getStatusCode();
+		Assert.assertEquals(statusCode, 200, "Status code is not 200");
+
+		// Additional assertions can be added to validate the response body, such as
+		// book details, format, etc.
+	}
+
+	// Test to get details of a specific book
+	@Test
+	public void testGetSpecificBook() {
+		// ID of the specific book you want to retrieve
+		String bookId = "1"; // Change to the actual book ID
+
+		// Building the request URL for the specific book
+		String requestUrl = "https://simple-books-api.glitch.me/books/" + bookId;
+
+		// Sending GET request to get details of the specific book
+		Response response = given().contentType(ContentType.JSON).when().get(requestUrl);
+		
+		System.out.println("Response Body:");
+		System.out.println(response.getBody().asString());
+
+		// Validating response
+		int statusCode = response.getStatusCode();
+		Assert.assertEquals(statusCode, 200, "Status code is not 200");
+
+		// Additional assertions can be added to validate the response body of the
+		// specific book
 	}
 }
