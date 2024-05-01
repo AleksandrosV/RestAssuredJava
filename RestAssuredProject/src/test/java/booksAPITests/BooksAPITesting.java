@@ -33,14 +33,20 @@ public class BooksAPITesting {
 	// Test to get details of a specific book
 	@Test
 	public void testGetSpecificBook() {
+		// Obtain access token
+		String accessToken = AccessTokenHelper.getAccessToken();
+
 		// ID of the specific book you want to retrieve
 		String bookId = "/1"; // Change to the actual book ID
 		String requestUrl = API_BOOKS_URL + bookId;
 
 		// Sending GET request to get details of the specific book
-		Response specificBookResponse = given().contentType(ContentType.JSON).when().get(requestUrl);
+		Response specificBookResponse = given().header("Authorization", "Bearer " + accessToken)
+				.contentType(ContentType.JSON).when().get(requestUrl);
+
 		System.out.println(specificBookResponse.getBody().asString());
 		int statusCode = specificBookResponse.getStatusCode();
 		Assert.assertEquals(statusCode, 200, "Status code is not 200");
 	}
+
 }
