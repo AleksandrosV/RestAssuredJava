@@ -1,21 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-05-02T21:46:33 EEST" name="Default suite" finished-at="2024-05-02T21:46:37 EEST" duration-ms="3978">
+  <suite started-at="2024-05-02T21:57:05 EEST" name="Default suite" finished-at="2024-05-02T21:57:13 EEST" duration-ms="8134">
     <groups>
     </groups>
-    <test started-at="2024-05-02T21:46:33 EEST" name="Default test" finished-at="2024-05-02T21:46:37 EEST" duration-ms="3978">
-      <class name="booksAPITests.BooksAPITesting">
-        <test-method is-config="true" signature="setup()[pri:0, instance:booksAPITests.BooksAPITesting@15ff3e9e]" started-at="2024-05-02T21:46:33 EEST" name="setup" finished-at="2024-05-02T21:46:36 EEST" duration-ms="2622" status="PASS">
+    <test started-at="2024-05-02T21:57:05 EEST" name="Default test" finished-at="2024-05-02T21:57:13 EEST" duration-ms="8134">
+      <class name="booksAPITests.StatusAPITesting">
+        <test-method is-config="true" signature="setup()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:05 EEST" name="setup" finished-at="2024-05-02T21:57:08 EEST" duration-ms="2617" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="testSpecificBookResponseFields()[pri:0, instance:booksAPITests.BooksAPITesting@15ff3e9e]" started-at="2024-05-02T21:46:36 EEST" name="testSpecificBookResponseFields" finished-at="2024-05-02T21:46:37 EEST" duration-ms="1333" status="PASS">
+        <test-method signature="testStatusResponseCode()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:08 EEST" name="testStatusResponseCode" finished-at="2024-05-02T21:57:08 EEST" duration-ms="7" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testSpecificBookResponseFields -->
-      </class> <!-- booksAPITests.BooksAPITesting -->
+        </test-method> <!-- testStatusResponseCode -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:08 EEST" name="setup" finished-at="2024-05-02T21:57:09 EEST" duration-ms="1345" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testStatusResponseFields()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:09 EEST" name="testStatusResponseFields" finished-at="2024-05-02T21:57:09 EEST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testStatusResponseFields -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:09 EEST" name="setup" finished-at="2024-05-02T21:57:11 EEST" duration-ms="1354" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testStatusResponseFormat()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:11 EEST" name="testStatusResponseFormat" finished-at="2024-05-02T21:57:11 EEST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testStatusResponseFormat -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:11 EEST" name="setup" finished-at="2024-05-02T21:57:12 EEST" duration-ms="1330" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testStatusResponseMessage()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:12 EEST" name="testStatusResponseMessage" finished-at="2024-05-02T21:57:12 EEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testStatusResponseMessage -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:12 EEST" name="setup" finished-at="2024-05-02T21:57:13 EEST" duration-ms="1429" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testStatusResponseTime()[pri:0, instance:booksAPITests.StatusAPITesting@52e6fdee]" started-at="2024-05-02T21:57:13 EEST" name="testStatusResponseTime" finished-at="2024-05-02T21:57:13 EEST" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testStatusResponseTime -->
+      </class> <!-- booksAPITests.StatusAPITesting -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
