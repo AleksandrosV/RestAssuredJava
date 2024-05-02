@@ -10,13 +10,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 public class StatusAPITesting {
-
 	private Response response;
 	private static final String API_STATUS_URL = "https://simple-books-api.glitch.me/status";
-	private static final long RESPONSE_TIME = 1000; // milliseconds
-	private static final long VALID_RESPONSE_CODE = 200;
-	private static final String SUCCESS_MESSAGE = "HTTP/1.1 200 OK";
-	private static final String CONTENT_TYPE = "application/json; charset=utf-8";
 
 	@BeforeMethod
 	public void setup() {
@@ -24,35 +19,39 @@ public class StatusAPITesting {
 		response = given().header("Authorization", "Bearer " + accessToken).when().get(API_STATUS_URL);
 	}
 
-	// Verify API status code
+	// Verify API Status response code
 	@Test
-	public void testAPIStatusCode() {
+	public void testStatusResponseCode() {
 		int statusCode = response.getStatusCode();
-		Assert.assertEquals(statusCode, VALID_RESPONSE_CODE, "Status code is not: " + VALID_RESPONSE_CODE);
+		Assert.assertEquals(statusCode, AccessTokenHelper.VALID_RESPONSE_CODE,
+				"Status code is not: " + AccessTokenHelper.VALID_RESPONSE_CODE);
 	}
 
-	// Verify API status message
+	// Verify API Status response message
 	@Test
-	public void testAPIStatusMessage() {
+	public void testStatusResponseMessage() {
 		String statusMessage = response.getStatusLine();
-		Assert.assertEquals(statusMessage, SUCCESS_MESSAGE, "Status message is not: " + SUCCESS_MESSAGE);
+		Assert.assertEquals(statusMessage, AccessTokenHelper.SUCCESS_MESSAGE,
+				"Status message is not: " + AccessTokenHelper.SUCCESS_MESSAGE);
 	}
 
-	// Verify API Response Format
+	// Verify API Status response format
 	@Test
 	public void testStatusResponseFormat() {
 		String contentType = response.getContentType();
-		Assert.assertEquals(contentType, CONTENT_TYPE, "Response format is not:" + CONTENT_TYPE);
+		Assert.assertEquals(contentType, AccessTokenHelper.CONTENT_TYPE_JSON,
+				"Response format is not:" + AccessTokenHelper.CONTENT_TYPE_JSON);
 	}
 
-	// Verify that the API response time is within acceptable limits.
+	// Verify that the API Status response time is within acceptable limits
 	@Test
 	public void testStatusResponseTime() {
 		long responseTime = response.getTime();
-		Assert.assertTrue(responseTime <= RESPONSE_TIME, "Response time is not within limits of:" + RESPONSE_TIME);
+		Assert.assertTrue(responseTime <= AccessTokenHelper.ACCEPTABLE_RESPONSE_TIME,
+				"Response time is not within limits of:" + AccessTokenHelper.ACCEPTABLE_RESPONSE_TIME);
 	}
 
-	// Verify API Response Fields
+	// Verify API Status response fields
 	@Test
 	public void testStatusResponseFields() {
 		JsonPath jsonPath = response.jsonPath();
