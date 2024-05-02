@@ -5,7 +5,7 @@
     <classes>
       <class name="booksAPITests.BooksAPITesting">
         <methods>
-          <include name="testResponseFields"/>
+          <include name="testSpecificBookResponseFields"/>
           <include name="setup"/>
         </methods>
       </class> <!-- booksAPITests.BooksAPITesting -->

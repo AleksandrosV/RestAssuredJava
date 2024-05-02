@@ -31,48 +31,60 @@ public class BooksAPITesting {
 	public void testGetBooks() {
 		int statusCode = response.getStatusCode();
 		Assert.assertEquals(statusCode, VALID_RESPONSE_CODE, "Status code is not 200");
-		String contentType = response.getContentType();
-		Assert.assertEquals(contentType, CONTENT_TYPE_JSON, "Response format is not JSON");
 	}
 
-	// Verify API Response Fields
+	// Verify API Books Response Fields
 	@Test
-	void testResponseFields() {
+	public void testBooksResponseFields() {
 		JsonPath jsonPath = response.jsonPath();
-		List<Map<String, Object>> books = jsonPath.getList("$");
-
-		for (Map<String, Object> book : books) {
-			Assert.assertTrue(book.containsKey("id"), "id field is missing");
-			Assert.assertTrue(book.containsKey("name"), "name field is missing");
-			Assert.assertTrue(book.containsKey("type"), "type field is missing");
-			Assert.assertTrue(book.containsKey("available"), "available field is missing");
+		List<Map<String, Object>> keys = jsonPath.getList("$");
+		for (Map<String, Object> key : keys) {
+			Assert.assertTrue(key.containsKey("id"), "id field is missing");
+			Assert.assertTrue(key.containsKey("name"), "name field is missing");
+			Assert.assertTrue(key.containsKey("type"), "type field is missing");
+			Assert.assertTrue(key.containsKey("available"), "available field is missing");
 		}
 	}
 
 	// Verify that the API response time is within acceptable limits.
 	@Test
-	void testResponseTime() {
+	public void testBooksResponseTime() {
 		long responseTime = response.getTime();
 		Assert.assertTrue(responseTime <= ACCEPTABLE_RESPONSE_TIME,
 				"Response time is not within limits of:" + ACCEPTABLE_RESPONSE_TIME);
 	}
 
-	// Test to get details of a specific book
+	// Verify API Response Format
 	@Test
-	public void testGetSpecificBook() {
+	public void testBooksResponseFormat() {
+		String contentType = response.getContentType();
+		Assert.assertEquals(contentType, CONTENT_TYPE_JSON, "Response format is not:" + CONTENT_TYPE_JSON);
+	}
+
+	// Test to verify response fields of a specific book
+	@Test
+	public void testSpecificBookResponseFields() {
 		// Obtain access token
 		String accessToken = AccessTokenHelper.getAccessToken();
-
 		// ID of the specific book you want to retrieve
 		String bookId = "/1";
 		String requestUrl = API_BOOKS_URL + bookId;
-
 		// Sending GET request to get details of the specific book
 		Response specificBookResponse = given().header("Authorization", "Bearer " + accessToken)
 				.contentType(ContentType.JSON).when().get(requestUrl);
-
-		System.out.println(specificBookResponse.getBody().asString());
+		// Verify response status code
 		int statusCode = specificBookResponse.getStatusCode();
-		Assert.assertEquals(statusCode, 200, "Status code is not 200");
+		Assert.assertEquals(statusCode, VALID_RESPONSE_CODE, "Status code is not:" + VALID_RESPONSE_CODE);
+		// Verify response fields of the specific book
+		JsonPath jsonPath = specificBookResponse.jsonPath();
+		Map<String, Object> bookDetails = jsonPath.getMap("$");
+		Assert.assertTrue(bookDetails.containsKey("id"), "id field is missing");
+		Assert.assertTrue(bookDetails.containsKey("name"), "name field is missing");
+		Assert.assertTrue(bookDetails.containsKey("author"), "author field is missing");
+		Assert.assertTrue(bookDetails.containsKey("isbn"), "isbn field is missing");
+		Assert.assertTrue(bookDetails.containsKey("type"), "type field is missing");
+		Assert.assertTrue(bookDetails.containsKey("price"), "price field is missing");
+		Assert.assertTrue(bookDetails.containsKey("current-stock"), "current-stock field is missing");
+		Assert.assertTrue(bookDetails.containsKey("available"), "available field is missing");
 	}
 }

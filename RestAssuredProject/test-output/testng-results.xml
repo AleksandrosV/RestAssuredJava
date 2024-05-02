@@ -2,16 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-05-01T23:46:58 EEST" name="Default suite" finished-at="2024-05-01T23:46:59 EEST" duration-ms="1677">
+  <suite started-at="2024-05-02T19:00:02 EEST" name="Default suite" finished-at="2024-05-02T19:00:08 EEST" duration-ms="5271">
     <groups>
     </groups>
-    <test started-at="2024-05-01T23:46:58 EEST" name="Default test" finished-at="2024-05-01T23:46:59 EEST" duration-ms="1677">
-      <class name="Test01_GET">
-        <test-method signature="testResponseFields()[pri:0, instance:Test01_GET@6e171cd7]" started-at="2024-05-01T23:46:58 EEST" name="testResponseFields" finished-at="2024-05-01T23:46:59 EEST" duration-ms="1653" status="PASS">
+    <test started-at="2024-05-02T19:00:02 EEST" name="Default test" finished-at="2024-05-02T19:00:08 EEST" duration-ms="5271">
+      <class name="booksAPITests.BooksAPITesting">
+        <test-method is-config="true" signature="setup()[pri:0, instance:booksAPITests.BooksAPITesting@7fa98a66]" started-at="2024-05-02T19:00:02 EEST" name="setup" finished-at="2024-05-02T19:00:06 EEST" duration-ms="3763" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testResponseFields -->
-      </class> <!-- Test01_GET -->
+        </test-method> <!-- setup -->
+        <test-method signature="testSpecificBookResponseFields()[pri:0, instance:booksAPITests.BooksAPITesting@7fa98a66]" started-at="2024-05-02T19:00:06 EEST" name="testSpecificBookResponseFields" finished-at="2024-05-02T19:00:08 EEST" duration-ms="1485" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSpecificBookResponseFields -->
+      </class> <!-- booksAPITests.BooksAPITesting -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

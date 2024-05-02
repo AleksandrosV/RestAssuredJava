@@ -40,21 +40,21 @@ public class StatusAPITesting {
 
 	// Verify API Response Format
 	@Test
-	void testResponseFormat() {
+	public void testStatusResponseFormat() {
 		String contentType = response.getContentType();
 		Assert.assertEquals(contentType, CONTENT_TYPE, "Response format is not:" + CONTENT_TYPE);
 	}
 
 	// Verify that the API response time is within acceptable limits.
 	@Test
-	void testResponseTime() {
+	public void testStatusResponseTime() {
 		long responseTime = response.getTime();
 		Assert.assertTrue(responseTime <= RESPONSE_TIME, "Response time is not within limits of:" + RESPONSE_TIME);
 	}
 
 	// Verify API Response Fields
 	@Test
-	void testResponseFields() {
+	public void testStatusResponseFields() {
 		JsonPath jsonPath = response.jsonPath();
 		Assert.assertNotNull(jsonPath.get("status"), "Status field is missing");
 	}
