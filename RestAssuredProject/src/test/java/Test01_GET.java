@@ -1,18 +1,16 @@
-import java.util.List;
-import java.util.Map;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.equalTo;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 public class Test01_GET {
 
 	@Test
 	void test_01() {
-		Response response = RestAssured.get("https://simple-books-api.glitch.me/books");
+		Response response = get("https://reqres.in/api/users?page=2");
 
 		System.out.println(response.asString());
 		System.out.println(response.getBody().asString());
@@ -20,26 +18,16 @@ public class Test01_GET {
 		System.out.println(response.getStatusLine());
 		System.out.println(response.getHeader("content-type"));
 		System.out.println(response.getTime());
+
+		int statusCode = response.getStatusCode();
+		Assert.assertEquals(statusCode, 200);
 	}
-	
+
 	@Test
-	void testResponseFields() {
-	    Response response = RestAssured.get("https://simple-books-api.glitch.me/books");
+	void test_02() {
+		// Verify response body
+		given().get("https://reqres.in/api/users?page=2").then().statusCode(200).body("data.id[1]", equalTo(8));
 
-	    JsonPath jsonPath = response.jsonPath();
-	    List<Map<String, Object>> books = jsonPath.getList("$");
-
-	    for (Map<String, Object> book : books) {
-	        System.out.println("Book ID: " + book.get("id"));
-	        System.out.println("Book Name: " + book.get("name"));
-	        System.out.println("Book Type: " + book.get("type"));
-	        System.out.println("Book Availability: " + book.get("available"));
-
-	        Assert.assertTrue(book.containsKey("id"), "id field is missing");
-	        Assert.assertTrue(book.containsKey("name"), "name field is missing");
-	        Assert.assertTrue(book.containsKey("type"), "type field is missing");
-	        Assert.assertTrue(book.containsKey("available"), "available field is missing");
-	    }
 	}
 
 }
