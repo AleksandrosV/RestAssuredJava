@@ -12,11 +12,11 @@ public class Tests_POST {
 	
 	@Test
 	public void test_1_post() {
-		JSONObject request = new JSONObject();
-		request.put("name", "Alex");
-		request.put("jobs", "QA Automation");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("name", "Aleksandros");
+		map.put("jobs", "QA Automation");
 
-		System.out.println(request.toJSONString());
+		JSONObject request = new JSONObject(map);
 
 		given().
 			header("Content-Type", "application/json").
